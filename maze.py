@@ -14,7 +14,7 @@ list=["xxxxxxxxxxxxxxx",
      "x        x  x x",
      "xxx xxx xx  x x",
      "xx    xx  x   x",
-     "xxxx   x     xx",
+     "xxxx   x    Fxx",
      "x xx x x x x xx",
      "xxxxxxxxxxxxxxx"]
 tile_list=[]
@@ -31,6 +31,19 @@ for y in range (len(list)):
       tile.speed(0)
       tile.goto(tilex,tiley)
       tile_list.append(tile)
+     elif character=="F":
+         food=turtle.Turtle()
+         food.shape("circle")
+         food.up()
+         food.speed(0)
+         food.goto(tilex,tiley)
+pen.up()
+pen.goto(-240,264)
+def check ():
+ if pen.distance (food)<10:
+    pen.write("     You win 😍",font=("arial",25,"bold"))
+    
+
 def validmove(x,y):
      for tile in tile_list:
         if x==tile.xcor() and y==tile.ycor():
@@ -42,6 +55,7 @@ def right():
         y=pen.ycor()
         if validmove(x,y)==True:
          pen.goto(x,y)
+        check()
 screen.listen()
 screen.onkey(right,"Right")
 def left():
@@ -50,6 +64,7 @@ def left():
         y=pen.ycor()
         if validmove(x,y)==True:
          pen.goto(x,y)
+        check()
 screen.listen()
 screen.onkey(left,"Left")
 def up():
@@ -58,6 +73,7 @@ def up():
         x=pen.xcor()
         if validmove(x,y)==True:
          pen.goto(x,y)
+        check()
 screen.listen()
 screen.onkey(up,"Up")
 def Down():
@@ -66,6 +82,7 @@ def Down():
         x=pen.xcor()
         if validmove(x,y)==True:
          pen.goto(x,y)
+        check()
 screen.listen()
 screen.onkey(Down,"Down")
 turtle.done()
