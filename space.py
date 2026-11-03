@@ -7,6 +7,7 @@ b.pos=(500,600)
 enemies=[]
 eb=[]
 lives=3
+neb=[]
 def newenemy():
     for i in range (5):
 
@@ -15,7 +16,18 @@ def newenemy():
      enemies.append(e)
     clock.schedule(newenemy,2)
 newenemy()
+def enemyshoot():
+   enemy=random.choice(enemies)
+   bullet=Actor("bullet.png")
+   bullet.pos=enemy.pos
+   neb.append(bullet)
+   clock.schedule(enemyshoot,2)
+
 def draw():
+    global lives
+    if lives<=0:
+       screen.blit("gover.png",(0,0))
+       return 
     screen.blit("space.jpg",(0,0))
     for enemy in enemies:
         enemy.draw()
@@ -23,9 +35,13 @@ def draw():
     for bullet in eb:
         bullet.draw()
     screen.draw.text("lives"+str(lives),(50,50))
+    for ebullet in neb:
+       ebullet.draw()
+       
 def update():
     global lives
-
+    if lives<=0:
+       return
     if keyboard.left:
         b.x-=5
     if keyboard.right:
@@ -45,7 +61,8 @@ def update():
            enemies.remove(enemy)
            eb.remove(bullet)
            lives+=1
-
+    for bullet in neb:
+       bullet.y+=3
 def on_key_down(key):
     if key==keys.SPACE:
       bu=Actor("bullet.png",(b.x,b.y))
