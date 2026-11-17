@@ -7,11 +7,16 @@ worm=Actor("cuteworm.png",(500,500))
 apple=Actor("applecore.png")
 pb=Actor("pb.png")
 def draw():
+    global sccore
+    if score<0:
+           screen.blit("gover.png",(0,0))
+           return 
     screen.blit("grass.jpg",(0,0))
     worm.draw()
     apple.draw()
     pb.draw()
     screen.draw.text("score"+str(score),(50,50))
+
 
 def update ():
   global score
@@ -31,6 +36,7 @@ def update ():
     score-=2
     pb.x=(random.randint(20,1000))
     pb.y=(random.randint(20,1000))
+  
     
 
 def spawn():
